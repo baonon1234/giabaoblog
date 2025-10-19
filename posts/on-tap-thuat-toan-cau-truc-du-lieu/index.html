@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Ôn tập Thuật toán và Cấu trúc dữ liệu cho sinh viên | Blog học lập trình cùng Babu</title>
+<meta name="keywords" content="thuật toán, cấu trúc dữ liệu, phỏng vấn">
+<meta name="description" content="Thuật toán và cấu trúc dữ liệu không chỉ để đi phỏng vấn. Chúng dạy chúng ta cách suy nghĩ có cấu trúc, chọn giải pháp phù hợp và ước lượng chi phí. Nếu bạn đã từng viết một đoạn code chạy đúng nhưng chậm khủng khiếp, bạn sẽ hiểu vì sao Big‑O lại quan trọng. Kế hoạch ôn tập hiệu quả nên bắt đầu từ các cấu trúc dữ liệu cốt lõi, rồi chuyển sang các mẫu thuật toán thường gặp, sau đó luyện đề với những ràng buộc thực tế.">
+<meta name="author" content="">
+<link rel="canonical" href="https://example.org/posts/on-tap-thuat-toan-cau-truc-du-lieu/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.8d666466b56d6427da7b7fb5f4fd667946c8e21204edcf603829a02bc12ba98d.css" integrity="sha256-jWZkZrVtZCfae3&#43;19P1meUbI4hIE7c9gOCmgK8ErqY0=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://example.org/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://example.org/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://example.org/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://example.org/apple-touch-icon.png">
+<link rel="mask-icon" href="https://example.org/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://example.org/posts/on-tap-thuat-toan-cau-truc-du-lieu/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://example.org/posts/on-tap-thuat-toan-cau-truc-du-lieu/">
+  <meta property="og:site_name" content="Blog học lập trình cùng Babu">
+  <meta property="og:title" content="Ôn tập Thuật toán và Cấu trúc dữ liệu cho sinh viên">
+  <meta property="og:description" content="Thuật toán và cấu trúc dữ liệu không chỉ để đi phỏng vấn. Chúng dạy chúng ta cách suy nghĩ có cấu trúc, chọn giải pháp phù hợp và ước lượng chi phí. Nếu bạn đã từng viết một đoạn code chạy đúng nhưng chậm khủng khiếp, bạn sẽ hiểu vì sao Big‑O lại quan trọng. Kế hoạch ôn tập hiệu quả nên bắt đầu từ các cấu trúc dữ liệu cốt lõi, rồi chuyển sang các mẫu thuật toán thường gặp, sau đó luyện đề với những ràng buộc thực tế.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-10-17T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-10-17T00:00:00+00:00">
+    <meta property="article:tag" content="Thuật Toán">
+    <meta property="article:tag" content="Cấu Trúc Dữ Liệu">
+    <meta property="article:tag" content="Phỏng Vấn">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&amp;w=1600&amp;auto=format&amp;fit=crop">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&amp;w=1600&amp;auto=format&amp;fit=crop">
+<meta name="twitter:title" content="Ôn tập Thuật toán và Cấu trúc dữ liệu cho sinh viên">
+<meta name="twitter:description" content="Thuật toán và cấu trúc dữ liệu không chỉ để đi phỏng vấn. Chúng dạy chúng ta cách suy nghĩ có cấu trúc, chọn giải pháp phù hợp và ước lượng chi phí. Nếu bạn đã từng viết một đoạn code chạy đúng nhưng chậm khủng khiếp, bạn sẽ hiểu vì sao Big‑O lại quan trọng. Kế hoạch ôn tập hiệu quả nên bắt đầu từ các cấu trúc dữ liệu cốt lõi, rồi chuyển sang các mẫu thuật toán thường gặp, sau đó luyện đề với những ràng buộc thực tế.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://example.org/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Ôn tập Thuật toán và Cấu trúc dữ liệu cho sinh viên",
+      "item": "https://example.org/posts/on-tap-thuat-toan-cau-truc-du-lieu/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Ôn tập Thuật toán và Cấu trúc dữ liệu cho sinh viên",
+  "name": "Ôn tập Thuật toán và Cấu trúc dữ liệu cho sinh viên",
+  "description": "Thuật toán và cấu trúc dữ liệu không chỉ để đi phỏng vấn. Chúng dạy chúng ta cách suy nghĩ có cấu trúc, chọn giải pháp phù hợp và ước lượng chi phí. Nếu bạn đã từng viết một đoạn code chạy đúng nhưng chậm khủng khiếp, bạn sẽ hiểu vì sao Big‑O lại quan trọng. Kế hoạch ôn tập hiệu quả nên bắt đầu từ các cấu trúc dữ liệu cốt lõi, rồi chuyển sang các mẫu thuật toán thường gặp, sau đó luyện đề với những ràng buộc thực tế.\n",
+  "keywords": [
+    "thuật toán", "cấu trúc dữ liệu", "phỏng vấn"
+  ],
+  "articleBody": "Thuật toán và cấu trúc dữ liệu không chỉ để đi phỏng vấn. Chúng dạy chúng ta cách suy nghĩ có cấu trúc, chọn giải pháp phù hợp và ước lượng chi phí. Nếu bạn đã từng viết một đoạn code chạy đúng nhưng chậm khủng khiếp, bạn sẽ hiểu vì sao Big‑O lại quan trọng. Kế hoạch ôn tập hiệu quả nên bắt đầu từ các cấu trúc dữ liệu cốt lõi, rồi chuyển sang các mẫu thuật toán thường gặp, sau đó luyện đề với những ràng buộc thực tế.\nVề cấu trúc dữ liệu, hãy nắm vững mảng, danh sách liên kết, ngăn xếp, hàng đợi, hash map/set, cây (BST, heap), và đồ thị. Với mỗi cấu trúc, bạn cần thuộc thao tác cơ bản, độ phức tạp, và trường hợp sử dụng. Ví dụ, khi cần tra cứu nhanh theo khóa, hash map là lựa chọn hiển nhiên; còn khi cần lấy phần tử nhỏ nhất/lớn nhất liên tục, hãy nghĩ đến heap.\nVề thuật toán, tập trung vào kỹ thuật hai con trỏ, quay lui, chia để trị, quy hoạch động, duyệt BFS/DFS trên đồ thị, và các thuật toán sắp xếp/ tìm kiếm kinh điển. Đừng chỉ đọc lời giải; hãy tự viết lại, thêm test biên như mảng rỗng, dữ liệu trùng lặp, hay kích thước cực lớn. Khi mắc kẹt, thử giảm bài toán về một phiên bản nhỏ hơn để tìm quy luật.\nMột lịch luyện gợi ý: mỗi tuần chọn 3 chủ đề, mỗi chủ đề ít nhất 3 bài. Ghi chú lại ý tưởng, công thức, và sai lầm thường gặp. Sau 4–6 tuần, quay lại làm lại các bài cũ mà không cần xem lời giải để đánh giá mức độ ghi nhớ. Cuối cùng, áp dụng vào dự án thật: ví dụ, dùng BFS để crawl dữ liệu theo lớp, hoặc dùng heap để xây tính năng xếp hạng theo thời gian thực. Khi bạn nhìn thấy thuật toán xuất hiện trong sản phẩm, môn học này sẽ trở nên thú vị hơn rất nhiều.\n",
+  "wordCount" : "348",
+  "inLanguage": "en",
+  "image":"https://images.unsplash.com/photo-1518770660439-4636190af475?q=80\u0026w=1600\u0026auto=format\u0026fit=crop","datePublished": "2025-10-17T00:00:00Z",
+  "dateModified": "2025-10-17T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://example.org/posts/on-tap-thuat-toan-cau-truc-du-lieu/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Blog học lập trình cùng Babu",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.org/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://example.org/" accesskey="h" title="Blog học lập trình cùng Babu (Alt + H)">Blog học lập trình cùng Babu</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Ôn tập Thuật toán và Cấu trúc dữ liệu cho sinh viên
+    </h1>
+    <div class="post-meta"><span title='2025-10-17 00:00:00 +0000 UTC'>October 17, 2025</span>
+
+</div>
+  </header> 
+<figure class="entry-cover">
+        <img loading="eager" src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&amp;w=1600&amp;auto=format&amp;fit=crop" alt="Data structures and algorithms">
+        <figcaption>Tư duy thuật toán</figcaption>
+</figure>
+  <div class="post-content"><p>Thuật toán và cấu trúc dữ liệu không chỉ để đi phỏng vấn. Chúng dạy chúng ta cách suy nghĩ có cấu trúc, chọn giải pháp phù hợp và ước lượng chi phí. Nếu bạn đã từng viết một đoạn code chạy đúng nhưng chậm khủng khiếp, bạn sẽ hiểu vì sao Big‑O lại quan trọng. Kế hoạch ôn tập hiệu quả nên bắt đầu từ các cấu trúc dữ liệu cốt lõi, rồi chuyển sang các mẫu thuật toán thường gặp, sau đó luyện đề với những ràng buộc thực tế.</p>
+<p>Về cấu trúc dữ liệu, hãy nắm vững mảng, danh sách liên kết, ngăn xếp, hàng đợi, hash map/set, cây (BST, heap), và đồ thị. Với mỗi cấu trúc, bạn cần thuộc thao tác cơ bản, độ phức tạp, và trường hợp sử dụng. Ví dụ, khi cần tra cứu nhanh theo khóa, hash map là lựa chọn hiển nhiên; còn khi cần lấy phần tử nhỏ nhất/lớn nhất liên tục, hãy nghĩ đến heap.</p>
+<p>Về thuật toán, tập trung vào kỹ thuật hai con trỏ, quay lui, chia để trị, quy hoạch động, duyệt BFS/DFS trên đồ thị, và các thuật toán sắp xếp/ tìm kiếm kinh điển. Đừng chỉ đọc lời giải; hãy tự viết lại, thêm test biên như mảng rỗng, dữ liệu trùng lặp, hay kích thước cực lớn. Khi mắc kẹt, thử giảm bài toán về một phiên bản nhỏ hơn để tìm quy luật.</p>
+<p>Một lịch luyện gợi ý: mỗi tuần chọn 3 chủ đề, mỗi chủ đề ít nhất 3 bài. Ghi chú lại ý tưởng, công thức, và sai lầm thường gặp. Sau 4–6 tuần, quay lại làm lại các bài cũ mà không cần xem lời giải để đánh giá mức độ ghi nhớ. Cuối cùng, áp dụng vào dự án thật: ví dụ, dùng BFS để crawl dữ liệu theo lớp, hoặc dùng heap để xây tính năng xếp hạng theo thời gian thực. Khi bạn nhìn thấy thuật toán xuất hiện trong sản phẩm, môn học này sẽ trở nên thú vị hơn rất nhiều.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://example.org/tags/thu%E1%BA%ADt-to%C3%A1n/">Thuật Toán</a></li>
+      <li><a href="https://example.org/tags/c%E1%BA%A5u-tr%C3%BAc-d%E1%BB%AF-li%E1%BB%87u/">Cấu Trúc Dữ Liệu</a></li>
+      <li><a href="https://example.org/tags/ph%E1%BB%8Fng-v%E1%BA%A5n/">Phỏng Vấn</a></li>
+    </ul>
+  </footer>
+
+  
+<div class="comments-section">
+  <div class="comments-header">
+    <h3>💬 Bình luận</h3>
+    <p>Chia sẻ suy nghĩ của bạn về bài viết này!</p>
+    <div class="comment-indicator">
+      <span class="indicator-dot"></span>
+      <span class="indicator-text">Hệ thống bình luận đã sẵn sàng</span>
+    </div>
+  </div>
+  
+  <div id="disqus_thread"></div>
+  <script>
+    
+
+    
+    var disqus_config = function () {
+      this.page.url = "https://example.org/posts/on-tap-thuat-toan-cau-truc-du-lieu/";  
+      this.page.identifier = "/posts/on-tap-thuat-toan-cau-truc-du-lieu/"; 
+    };
+    
+    (function() { 
+    var d = document, s = d.createElement('script');
+    s.src = 'https://giabaoblog.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Vui lòng bật JavaScript để xem <a href="https://disqus.com/?ref_noscript">bình luận được hỗ trợ bởi Disqus.</a></noscript>
+</div>
+
+
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="https://example.org/">Blog học lập trình cùng Babu</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
