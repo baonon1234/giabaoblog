@@ -1,6 +1,6 @@
 {{ define "main" }}
   <div style="margin-bottom:12px; text-align:center;">
-    <a class="btn" href="/" style="display:inline-block; padding:8px 14px; border-radius:999px; background:#111; color:#fff; text-decoration:none; box-shadow:0 6px 18px rgba(0,0,0,.1);">← Quay lại trang chủ</a>
+    <a class="btn" href="{{ "/" | relURL }}" style="display:inline-block; padding:8px 14px; border-radius:999px; background:#111; color:#fff; text-decoration:none; box-shadow:0 6px 18px rgba(0,0,0,.1);">← Quay lại trang chủ</a>
   </div>
   
   <!-- Tiêu đề trang -->
@@ -42,7 +42,7 @@
 
   // Load search index
   window.onload = function() {
-    fetch('/index.json')
+    fetch('{{ "/index.json" | relURL }}')
       .then(response => response.json())
       .then(data => {
         allPosts = data;
