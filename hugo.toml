@@ -2,6 +2,7 @@ theme = "PaperMod"
 baseURL = 'https://baonon1234.github.io/giabaoblog/'
 languageCode = 'en-us'
 title = 'Blog học lập trình cùng Babu'
+canonifyURLs = true
 
 [params]
 disableSpecial1stPost = true
