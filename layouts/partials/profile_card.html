@@ -1,0 +1,25 @@
+{{- with site.Params.homeInfoParams.profile }}
+<div class="profile-card-section">
+  <div class="profile-card">
+    <div class="profile-avatar">
+      <img src="/avatar.jpg" alt="Avatar của Gia Bảo" class="avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="avatar-placeholder" style="display:none;">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="40" r="40" fill="#22c55e"/>
+          <circle cx="40" cy="32" r="12" fill="white"/>
+          <path d="M20 60c0-11 9-20 20-20s20 9 20 20" fill="white"/>
+        </svg>
+      </div>
+    </div>
+    <div class="profile-info">
+      <h3 class="profile-name">{{ .name }}</h3>
+      <p class="profile-age">{{ .age }}</p>
+      <p class="profile-major">{{ .major }}</p>
+      <p class="profile-school">{{ .school }}</p>
+    </div>
+    <div class="profile-button">
+      <a href="/about/" class="btn-profile">Xem thêm về tác giả</a>
+    </div>
+  </div>
+</div>
+{{- end }}

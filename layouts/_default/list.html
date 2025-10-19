@@ -1,0 +1,103 @@
+{{ define "main" }}
+  <div style="margin-bottom:12px; text-align:center;">
+    <a class="btn" href="/" style="display:inline-block; padding:8px 14px; border-radius:999px; background:#111; color:#fff; text-decoration:none; box-shadow:0 6px 18px rgba(0,0,0,.1);">← Quay lại trang chủ</a>
+  </div>
+  
+  <!-- Tiêu đề trang -->
+  <div class="posts-header">
+    <h1 class="posts-title">📝 Các bài viết đã đăng</h1>
+    <p class="posts-subtitle">Khám phá những bài viết mới nhất về lập trình và công nghệ</p>
+  </div>
+
+  <!-- Thanh tìm kiếm -->
+  <div class="search-section" style="margin: 2rem 0; text-align: center;">
+    <div class="search-container" style="max-width: 600px; margin: 0 auto; position: relative;">
+      <input type="text" id="postSearchInput" placeholder="Tìm kiếm bài viết..." 
+             style="width: 100%; padding: 12px 16px; font-size: 16px; border: 2px solid #e0e0e0; border-radius: 8px; outline: none; transition: border-color 0.3s ease; background: #fff;">
+      <div id="searchResults" style="position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); max-height: 400px; overflow-y: auto; z-index: 1000; display: none;"></div>
+    </div>
+  </div>
+
+  {{ $pages := where .Pages "Type" "posts" }}
+  {{ $first := first 9 $pages }}
+  <div class="posts-grid">
+  {{ range $first }}
+    <article class="post-entry">
+      <header class="entry-header"><h2>{{ .Title }}</h2></header>
+      <div class="entry-content"><p>{{ .Summary | plainify | htmlUnescape }}</p></div>
+      <a class="entry-link" href="{{ .RelPermalink }}" aria-label="{{ .Title }}"></a>
+    </article>
+  {{ end }}
+  </div>
+
+  <!-- Include Fuse.js library -->
+  {{ partial "search_scripts.html" . }}
+
+  <!-- JavaScript cho tìm kiếm -->
+  <script>
+  let fuse;
+  let searchInput = document.getElementById('postSearchInput');
+  let searchResults = document.getElementById('searchResults');
+  let allPosts = [];
+
+  // Load search index
+  window.onload = function() {
+    fetch('/index.json')
+      .then(response => response.json())
+      .then(data => {
+        allPosts = data;
+        // Initialize Fuse.js
+        let options = {
+          distance: 100,
+          threshold: 0.4,
+          ignoreLocation: true,
+          keys: ['title', 'summary', 'content']
+        };
+        fuse = new Fuse(data, options);
+      })
+      .catch(error => console.log('Error loading search index:', error));
+  };
+
+  // Search functionality
+  searchInput.addEventListener('input', function() {
+    let query = this.value.trim();
+    
+    if (query.length < 2) {
+      searchResults.style.display = 'none';
+      return;
+    }
+
+    if (fuse) {
+      let results = fuse.search(query);
+      
+      if (results.length > 0) {
+        let html = '';
+        results.slice(0, 10).forEach(result => {
+          html += `
+            <div class="search-result-item" style="padding: 12px 16px; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background-color 0.2s ease;" 
+                 onmouseover="this.style.backgroundColor='#f8f9fa'" 
+                 onmouseout="this.style.backgroundColor='#fff'"
+                 onclick="window.location.href='${result.item.permalink}'">
+              <div style="font-weight: 600; margin-bottom: 4px; color: #333;">${result.item.title}</div>
+              <div style="color: #666; font-size: 14px; line-height: 1.4;">${result.item.summary || ''}</div>
+            </div>
+          `;
+        });
+        searchResults.innerHTML = html;
+        searchResults.style.display = 'block';
+      } else {
+        searchResults.innerHTML = '<div style="padding: 20px; text-align: center; color: #666; font-style: italic;">Không tìm thấy bài viết nào</div>';
+        searchResults.style.display = 'block';
+      }
+    }
+  });
+
+  // Hide results when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.search-container')) {
+      searchResults.style.display = 'none';
+    }
+  });
+  </script>
+{{ end }}
+

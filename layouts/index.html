@@ -1,0 +1,21 @@
+{{ define "main" }}
+  <!-- Floating cards background -->
+  <div class="floating-cards">
+    <div class="floating-card"></div>
+    <div class="floating-card"></div>
+    <div class="floating-card"></div>
+    <div class="floating-card"></div>
+    <div class="floating-card"></div>
+    <div class="floating-card"></div>
+  </div>
+
+  {{ if site.Params.homeInfoParams }}
+    {{ partial "home_info.html" . }}
+  {{ end }}
+  {{ if not (site.Params.homeInfoParams.Buttons) }}
+    <div class="hero-buttons" style="--d:3; text-align:center; margin-top:.5rem;">
+      <a class="btn" href="/posts/">Xem bài viết</a>
+    </div>
+  {{ end }}
+{{ end }}
+

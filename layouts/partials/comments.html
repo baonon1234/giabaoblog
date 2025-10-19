@@ -1,0 +1,39 @@
+{{ if .Site.Params.disqusShortname }}
+<div class="comments-section">
+  <div class="comments-header">
+    <h3>💬 Bình luận</h3>
+    <p>Chia sẻ suy nghĩ của bạn về bài viết này!</p>
+    <div class="comment-indicator">
+      <span class="indicator-dot"></span>
+      <span class="indicator-text">Hệ thống bình luận đã sẵn sàng</span>
+    </div>
+  </div>
+  
+  <div id="disqus_thread"></div>
+  <script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    
+    var disqus_config = function () {
+      this.page.url = {{ .Permalink }};  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = {{ .RelPermalink }}; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://{{ .Site.Params.disqusShortname }}.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Vui lòng bật JavaScript để xem <a href="https://disqus.com/?ref_noscript">bình luận được hỗ trợ bởi Disqus.</a></noscript>
+</div>
+{{ else }}
+<div class="comments-section">
+  <div class="comments-header">
+    <h3>💬 Bình luận</h3>
+    <p>Hệ thống bình luận chưa được cấu hình. Vui lòng liên hệ quản trị viên.</p>
+  </div>
+</div>
+{{ end }}

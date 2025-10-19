@@ -1,0 +1,261 @@
+{{ define "main" }}
+<header class="page-header">
+    <h1>{{- (printf "%s&nbsp;" .Title ) | htmlUnescape -}}
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+    </h1>
+    {{- if .Description }}
+    <div class="post-description">
+        {{ .Description }}
+    </div>
+    {{- end }}
+</header>
+
+<div id="searchbox">
+    <input id="searchInput" autofocus placeholder="{{ .Params.placeholder | default (printf "%s ↵" .Title) }}"
+        aria-label="search" type="search" autocomplete="off" maxlength="64">
+    <ul id="searchResults" aria-label="search results"></ul>
+</div>
+
+<!-- Thêm CSS tùy chỉnh cho tìm kiếm -->
+<style>
+#searchbox {
+    max-width: 600px;
+    margin: 2rem auto;
+    position: relative;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    background: #fff;
+}
+
+#searchInput:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+#searchResults {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0 0;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+#searchResults li {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+#searchResults li:last-child {
+    border-bottom: none;
+}
+
+#searchResults .post-entry {
+    display: block;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.2s ease;
+}
+
+#searchResults .post-entry:hover,
+#searchResults .post-entry.focus {
+    background-color: #f8f9fa;
+}
+
+#searchResults .entry-header {
+    font-weight: 600;
+    margin: 0;
+    font-size: 16px;
+}
+
+#searchResults .entry-content {
+    margin: 4px 0 0 0;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.no-results {
+    padding: 20px;
+    text-align: center;
+    color: #666;
+    font-style: italic;
+}
+</style>
+
+<!-- Include Fuse.js library -->
+{{ partial "search_scripts.html" . }}
+
+<!-- Thêm JavaScript tùy chỉnh cho tìm kiếm -->
+<script>
+
+let fuse; // holds our search engine
+let resList = document.getElementById('searchResults');
+let sInput = document.getElementById('searchInput');
+let first, last, current_elem = null
+let resultsAvailable = false;
+
+// load our search index
+window.onload = function () {
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                let data = JSON.parse(xhr.responseText);
+                if (data) {
+                    // fuse.js options; check fuse.js website for details
+                    let options = {
+                        distance: 100,
+                        threshold: 0.4,
+                        ignoreLocation: true,
+                        keys: [
+                            'title',
+                            'permalink',
+                            'summary',
+                            'content'
+                        ]
+                    };
+                    if (params.fuseOpts) {
+                        options = {
+                            isCaseSensitive: params.fuseOpts.iscasesensitive ?? false,
+                            includeScore: params.fuseOpts.includescore ?? false,
+                            includeMatches: params.fuseOpts.includematches ?? false,
+                            minMatchCharLength: params.fuseOpts.minmatchcharlength ?? 1,
+                            shouldSort: params.fuseOpts.shouldsort ?? true,
+                            findAllMatches: params.fuseOpts.findallmatches ?? false,
+                            keys: params.fuseOpts.keys ?? ['title', 'permalink', 'summary', 'content'],
+                            location: params.fuseOpts.location ?? 0,
+                            threshold: params.fuseOpts.threshold ?? 0.4,
+                            distance: params.fuseOpts.distance ?? 100,
+                            ignoreLocation: params.fuseOpts.ignorelocation ?? true
+                        }
+                    }
+                    fuse = new Fuse(data, options); // build the index from the json file
+                }
+            } else {
+                console.log(xhr.responseText);
+            }
+        }
+    };
+    xhr.open('GET', "../index.json");
+    xhr.send();
+}
+
+function activeToggle(ae) {
+    document.querySelectorAll('.focus').forEach(function (element) {
+        // rm focus class
+        element.classList.remove("focus")
+    });
+    if (ae) {
+        ae.focus()
+        document.activeElement = current_elem = ae;
+        ae.parentElement.classList.add("focus")
+    } else {
+        document.activeElement.parentElement.classList.add("focus")
+    }
+}
+
+function reset() {
+    resultsAvailable = false;
+    resList.innerHTML = sInput.value = ''; // clear inputbox and searchResults
+    sInput.focus(); // shift focus to input box
+}
+
+// execute search as each character is typed
+sInput.onkeyup = function (e) {
+    // run a search query (for "term") every time a letter is typed
+    // in the search box
+    if (fuse) {
+        let results;
+        if (params.fuseOpts) {
+            results = fuse.search(this.value.trim(), {limit: params.fuseOpts.limit}); // the actual query being run using fuse.js along with options
+        } else {
+            results = fuse.search(this.value.trim()); // the actual query being run using fuse.js
+        }
+        if (results.length !== 0) {
+            // build our html if result exists
+            let resultSet = ''; // our results bucket
+
+            for (let item in results) {
+                resultSet += `<li class="post-entry">
+                    <header class="entry-header">${results[item].item.title}</header>
+                    <div class="entry-content">${results[item].item.summary || ''}</div>
+                    <a href="${results[item].item.permalink}" aria-label="${results[item].item.title}"></a>
+                </li>`
+            }
+
+            resList.innerHTML = resultSet;
+            resultsAvailable = true;
+            first = resList.firstChild;
+            last = resList.lastChild;
+        } else {
+            resultsAvailable = false;
+            resList.innerHTML = '<li class="no-results">Không tìm thấy bài viết nào</li>';
+        }
+    }
+}
+
+sInput.addEventListener('search', function (e) {
+    // clicked on x
+    if (!this.value) reset()
+})
+
+// kb bindings
+document.onkeydown = function (e) {
+    let key = e.key;
+    let ae = document.activeElement;
+
+    let inbox = document.getElementById("searchbox").contains(ae)
+
+    if (ae === sInput) {
+        let elements = document.getElementsByClassName('focus');
+        while (elements.length > 0) {
+            elements[0].classList.remove('focus');
+        }
+    } else if (current_elem) ae = current_elem;
+
+    if (key === "Escape") {
+        reset()
+    } else if (!resultsAvailable || !inbox) {
+        return
+    } else if (key === "ArrowDown") {
+        e.preventDefault();
+        if (ae == sInput) {
+            // if the currently focused element is the search input, focus the <a> of first <li>
+            activeToggle(resList.firstChild.lastChild);
+        } else if (ae.parentElement != last) {
+            // if the currently focused element's parent is last, do nothing
+            // otherwise select the next search result
+            activeToggle(ae.parentElement.nextSibling.lastChild);
+        }
+    } else if (key === "ArrowUp") {
+        e.preventDefault();
+        if (ae.parentElement == first) {
+            // if the currently focused element is first item, go to input box
+            activeToggle(sInput);
+        } else if (ae != sInput) {
+            // if the currently focused element is input box, do nothing
+            // otherwise select the previous search result
+            activeToggle(ae.parentElement.previousSibling.lastChild);
+        }
+    } else if (key === "ArrowRight") {
+        ae.click(); // click on active link
+    }
+}
+</script>
+{{ end }}

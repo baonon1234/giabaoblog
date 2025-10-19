@@ -1,0 +1,20 @@
+{{/* Renders a small circular agent icon based on .Params.agent */}}
+{{- $agent := .Params.agent | default "default" -}}
+{{- $icons := dict 
+  "brimstone" "https://raw.githubusercontent.com/val-icons/agents/main/png/brimstone.png"
+  "cypher"    "https://raw.githubusercontent.com/val-icons/agents/main/png/cypher.png"
+  "jett"      "https://raw.githubusercontent.com/val-icons/agents/main/png/jett.png"
+  "sage"      "https://raw.githubusercontent.com/val-icons/agents/main/png/sage.png"
+  "sova"      "https://raw.githubusercontent.com/val-icons/agents/main/png/sova.png"
+  "viper"     "https://raw.githubusercontent.com/val-icons/agents/main/png/viper.png"
+  "phoenix"   "https://raw.githubusercontent.com/val-icons/agents/main/png/phoenix.png"
+  "raze"      "https://raw.githubusercontent.com/val-icons/agents/main/png/raze.png"
+  "omen"      "https://raw.githubusercontent.com/val-icons/agents/main/png/omen.png"
+  "reyna"     "https://raw.githubusercontent.com/val-icons/agents/main/png/reyna.png"
+  "default"   "https://avatars.githubusercontent.com/u/9919?s=200&v=4"
+ -}}
+{{- $src := index $icons $agent | default (index $icons "default") -}}
+<span class="agent-ico" title="{{ $agent }}">
+  <img src="{{ $src }}" alt="{{ $agent }}" loading="lazy" />
+  </span>
+

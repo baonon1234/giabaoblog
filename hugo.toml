@@ -1,0 +1,80 @@
+theme = "PaperMod"
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'Blog học lập trình cùng Babu'
+
+[params]
+disableSpecial1stPost = true
+disqusShortname = "giabaoblog"  # Thay đổi thành shortname Disqus của bạn
+
+  [params.homeInfoParams]
+  Title = "EAT • SLEEP • CODE • REPEAT"
+  Subtitle = "KEEP CALM AND CODE ON"
+  Name = "Trần Nguyễn Gia Bảo"
+  
+  [params.homeInfoParams.profile]
+  name = "Trần Nguyễn Gia Bảo"
+  age = "21 tuổi"
+  major = "Sinh viên ngành Công Nghệ Thông Tin"
+  school = "Trường Đại Học Công Nghệ TP.HCM - HUTECH"
+
+  [params.profileMode]
+  enabled = false
+  title = 'TRẦN NGUYỄN GIA BẢO'
+  subtitle = ''
+
+  [[params.profileMode.buttons]]
+  name = 'Giới thiệu về tôi'
+  url = '/posts/gioi-thieu-ban-than/'
+
+  [[params.profileMode.buttons]]
+  name = 'Học Java & JavaScript'
+  url = '/posts/hoc-java-va-javascript-nhu-the-nao/'
+
+  [[params.profileMode.buttons]]
+  name = 'Trải nghiệm ở HUTECH'
+  url = '/posts/trai-nghiem-hoc-o-hutech/'
+
+  [[params.profileMode.buttons]]
+  name = 'Các game mình chơi'
+  url = '/posts/cac-game-minh-choi/'
+
+[params.assets]
+  disableFingerprinting = false
+
+[params.assets.css]
+  # Enable PaperMod extended CSS pipeline folder
+  # Our custom styles go in assets/css/extended/custom.css
+  add = ["css/extended/custom.css"]
+
+# Cấu hình tìm kiếm
+[params.fuseOpts]
+  iscasesensitive = false
+  includescore = false
+  includematches = false
+  minmatchcharlength = 1
+  shouldsort = true
+  findallmatches = false
+  keys = ["title", "permalink", "summary", "content"]
+  location = 0
+  threshold = 0.4
+  distance = 100
+  ignorelocation = true
+  limit = 10
+
+# Cấu hình output formats
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  page = ["HTML"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  term = ["HTML"]
+
+# Cấu hình content
+[content]
+  [content.page]
+    [content.page.frontmatter]
+      lastmod = ["lastmod", ":fileModTime", ":default"]
+      publishDate = ["publishdate", "date"]
+      expiryDate = ["expirydate"]
+
