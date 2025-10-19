@@ -1,0 +1,14 @@
+{{- /* Render Google Analytics only when params.analytics.google.SiteID is set */ -}}
+{{- $siteID := or .Site.Params.analytics.google.SiteID .Site.Params.googleAnalytics -}}
+{{- if $siteID -}}
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ $siteID }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);} gtag('js', new Date());
+  gtag('config', '{{ $siteID }}');
+</script>
+<!-- End Google Analytics -->
+{{- end -}}
+
+
