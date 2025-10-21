@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Data on Blog học lập trình cùng Babu</title>
+    <link>http://localhost:1313/tags/data/</link>
+    <description>Recent content in Data on Blog học lập trình cùng Babu</description>
+    <generator>Hugo -- 0.150.1</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 17 Oct 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/data/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tự học Machine Learning cơ bản: từ số liệu đến mô hình</title>
+      <link>http://localhost:1313/posts/tu-hoc-machine-learning-co-ban/</link>
+      <pubDate>Fri, 17 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/tu-hoc-machine-learning-co-ban/</guid>
+      <description>&lt;p&gt;Machine Learning nghe có vẻ đồ sộ, nhưng bước chân đầu tiên lại rất cụ thể: chuẩn hóa dữ liệu, chọn mô hình phù hợp và đo lường đúng cách. Nếu bạn là sinh viên IT, hãy bắt đầu với Python, NumPy, Pandas và scikit‑learn. Mục tiêu là hiểu pipeline điển hình: đọc dữ liệu, xử lý thiếu/ngoại lệ, tách tập train/test, huấn luyện, đánh giá và lưu mô hình để dùng lại.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

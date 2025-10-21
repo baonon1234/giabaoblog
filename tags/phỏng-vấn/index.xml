@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Phỏng Vấn on Blog học lập trình cùng Babu</title>
+    <link>http://localhost:1313/tags/ph%E1%BB%8Fng-v%E1%BA%A5n/</link>
+    <description>Recent content in Phỏng Vấn on Blog học lập trình cùng Babu</description>
+    <generator>Hugo -- 0.150.1</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 17 Oct 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/ph%E1%BB%8Fng-v%E1%BA%A5n/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ôn tập Thuật toán và Cấu trúc dữ liệu cho sinh viên</title>
+      <link>http://localhost:1313/posts/on-tap-thuat-toan-cau-truc-du-lieu/</link>
+      <pubDate>Fri, 17 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/on-tap-thuat-toan-cau-truc-du-lieu/</guid>
+      <description>&lt;p&gt;Thuật toán và cấu trúc dữ liệu không chỉ để đi phỏng vấn. Chúng dạy chúng ta cách suy nghĩ có cấu trúc, chọn giải pháp phù hợp và ước lượng chi phí. Nếu bạn đã từng viết một đoạn code chạy đúng nhưng chậm khủng khiếp, bạn sẽ hiểu vì sao Big‑O lại quan trọng. Kế hoạch ôn tập hiệu quả nên bắt đầu từ các cấu trúc dữ liệu cốt lõi, rồi chuyển sang các mẫu thuật toán thường gặp, sau đó luyện đề với những ràng buộc thực tế.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
