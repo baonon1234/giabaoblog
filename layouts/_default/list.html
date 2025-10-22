@@ -18,10 +18,9 @@
     </div>
   </div>
 
-  {{ $pages := where .Pages "Type" "posts" }}
-  {{ $first := first 9 $pages }}
+  {{ $paginator := .Paginate (where .Pages "Type" "posts") }}
   <div class="posts-grid">
-  {{ range $first }}
+  {{ range $paginator.Pages }}
     <article class="post-entry">
       <header class="entry-header"><h2>{{ .Title }}</h2></header>
       <div class="entry-content"><p>{{ .Summary | plainify | htmlUnescape }}</p></div>
@@ -29,6 +28,27 @@
     </article>
   {{ end }}
   </div>
+
+  <!-- Pagination -->
+  {{ if gt $paginator.TotalPages 1 }}
+  <nav class="pagination-nav" style="margin-top: 2rem; text-align: center;">
+    {{ if $paginator.HasPrev }}
+      <a href="{{ $paginator.Prev.URL }}" class="pagination-btn" style="display: inline-block; padding: 8px 16px; margin: 0 4px; background: #f8f9fa; color: #333; text-decoration: none; border-radius: 4px; border: 1px solid #dee2e6;">← Trang trước</a>
+    {{ end }}
+    
+    {{ range $paginator.Pagers }}
+      {{ if eq . $paginator }}
+        <span class="pagination-current" style="display: inline-block; padding: 8px 16px; margin: 0 4px; background: #007bff; color: white; border-radius: 4px;">{{ .PageNumber }}</span>
+      {{ else }}
+        <a href="{{ .URL }}" class="pagination-btn" style="display: inline-block; padding: 8px 16px; margin: 0 4px; background: #f8f9fa; color: #333; text-decoration: none; border-radius: 4px; border: 1px solid #dee2e6;">{{ .PageNumber }}</a>
+      {{ end }}
+    {{ end }}
+    
+    {{ if $paginator.HasNext }}
+      <a href="{{ $paginator.Next.URL }}" class="pagination-btn" style="display: inline-block; padding: 8px 16px; margin: 0 4px; background: #f8f9fa; color: #333; text-decoration: none; border-radius: 4px; border: 1px solid #dee2e6;">Trang sau →</a>
+    {{ end }}
+  </nav>
+  {{ end }}
 
   <!-- Include Fuse.js library -->
   {{ partial "search_scripts.html" . }}

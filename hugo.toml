@@ -70,6 +70,10 @@ disqusShortname = "giabaoblog"  # Thay đổi thành shortname Disqus của bạ
   taxonomy = ["HTML", "RSS"]
   term = ["HTML"]
 
+# Cấu hình pagination
+paginate = 10
+paginatePath = "page"
+
 # Cấu hình content
 [content]
   [content.page]
