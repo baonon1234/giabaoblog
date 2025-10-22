@@ -1,29 +1,48 @@
-name: Deploy Hugo site to GitHub Pages
+name: Hugo Build and Deploy
 
 on:
   push:
-    branches:
-      - main  # hoặc 'master' tùy nhánh bạn đang dùng
-  workflow_dispatch:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: 'latest'
+          extended: true
 
-      - name: Build
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v4
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Build with Hugo
         run: hugo --minify
 
       - name: Upload artifact
