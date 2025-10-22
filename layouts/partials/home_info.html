@@ -30,7 +30,7 @@
   {{ with .profile }}
   <aside class="hero-profile">
     <div class="profile-avatar">
-      <img src="/avatar.jpg" alt="Avatar của Gia Bảo" class="avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <img src="{{ "avatar.jpg" | relURL }}" alt="Avatar của Gia Bảo" class="avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
       <div class="avatar-placeholder" style="display:none;">
         <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="40" cy="40" r="40" fill="#22c55e"/>
