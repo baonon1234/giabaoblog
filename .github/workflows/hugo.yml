@@ -40,7 +40,7 @@ jobs:
         uses: actions/configure-pages@v4
 
       - name: Install Node.js dependencies
-        run: npm ci
+        #run: npm ci
 
       - name: Build with Hugo
         run: hugo --minify
