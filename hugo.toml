@@ -1,5 +1,5 @@
 theme = "PaperMod"
-baseURL = 'https://baonon1234.github.io/giabaoblog/'
+baseURL = 'https://example.org/'
 languageCode = 'en-us'
 title = 'Blog học lập trình cùng Babu'
 
